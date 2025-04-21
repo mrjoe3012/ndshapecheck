@@ -15,3 +15,10 @@ shapecheck = "shapecheck:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "numpy>=2.2.5",
+    "pytest>=8.3.5",
+]
