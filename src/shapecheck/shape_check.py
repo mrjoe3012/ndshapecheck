@@ -4,7 +4,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 __all__ = ["ShapeCheck"]
-
 if TYPE_CHECKING:
     from shapecheck.shape_rule import ShapeRule
 
