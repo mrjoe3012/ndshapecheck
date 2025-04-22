@@ -27,4 +27,4 @@ jobs:
         uv run mypy src test
     - name: Lint - ruff
       run: |
-        ruff check src test
+        uv ruff check src test
