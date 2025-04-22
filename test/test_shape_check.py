@@ -1,9 +1,16 @@
 """
 Tests for the shape check library.
 """
+import numpy as np
 
-def test_shape_check() -> None:
+def test_single_shape_happy() -> None:
     """
-    A placeholder test. 
+
+    """
+    pass
+
+def test_single_shape_sad() -> None:
+    """
+    
     """
     pass
