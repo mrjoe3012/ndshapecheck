@@ -22,7 +22,7 @@ def __parse_shape_str(shape_str: str) -> tuple[list[Optional[str]], list[Optiona
     literals: list[Optional[int]] = []
     
     elem_re = r'[a-zA-Z0-9_]+[+*?]?'
-    shape_str_re = fr'\b*{elem_re}(?:,{elem_re})*'
+    shape_str_re = fr'\s*{elem_re}(?:\s*,\s*{elem_re})*\s*'
     valid_m = re.fullmatch(shape_str_re, shape_str)
     if valid_m is None:
         raise ValueError(f"Invalid shape string '{shape_str}'")
