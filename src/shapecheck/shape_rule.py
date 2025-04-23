@@ -3,7 +3,8 @@ Contains code for checking a shape rule which is expressed as a string of symbol
 and literals.
 """
 from __future__ import annotations
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, Optional, overload
+from shapecheck.has_shape import HasShape
 import re
 
 __all__ = ["ShapeRule"]
@@ -53,7 +54,11 @@ class ShapeRule:
         self._context = context
         self._shape_str = shape_str
 
-    def check(self, shape: tuple[int, ...]) -> bool:
+    @overload
+    def check(self, shape: HasShape) -> bool: ...
+    @overload
+    def check(self, shape: tuple[int, ...]) -> bool: ...
+    def check(self, shape):
         """
         Has side-effects upon the context passed to the __init__ constructor by assigning
         shape values to provided symbols.
@@ -61,7 +66,10 @@ class ShapeRule:
         of integers.
         :returns: True if the provided shape matches the rule.
         """
-        if not isinstance(shape, tuple):
+        if isinstance(shape, HasShape):
+            return self.check(shape.shape)
+        elif not isinstance(shape, tuple):
             raise ValueError("shape must be a tuple of integers.")
         shape = tuple(int(x) for x in shape)
+        raise NotImplementedError()
         return False
