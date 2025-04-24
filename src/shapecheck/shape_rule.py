@@ -11,14 +11,13 @@ __all__ = ["ShapeRule"]
 if TYPE_CHECKING:
     from shapecheck.shape_check import ShapeCheck
 
-def __parse_shape_str(shape_str: str) -> tuple[list[Optional[str]], list[Optional[int]]]:
+def __parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[int]]]:
     """
     :param shape_str: A shape string consisting of symbols and literals seperated
     by commas.
-    :returns: Tuple containing the symbols and literals. The lists are parallel and if
-    symbols[i] is None then literals[i] is not None.
+    :returns: Tuple containing the symbols and literals.
     """
-    symbols: list[Optional[str]] = []
+    symbols: list[str] = []
     literals: list[Optional[int]] = []
     
     elem_re = r'[a-zA-Z0-9_]+[+*?]?'
@@ -30,16 +29,35 @@ def __parse_shape_str(shape_str: str) -> tuple[list[Optional[str]], list[Optiona
     for elem in elements:
         num = None
         try:
-            num = int(elem)
+            if elem[-1] in '?*+':
+                num = int(elem[:-1])
+            else:
+                num = int(elem)
         except ValueError:
-            pass
-        if num is None:
-            symbols.append(elem)
-            literals.append(None)
-        else:
-            symbols.append(None)
-            literals.append(num)
+            num = None
+        symbols.append(elem)
+        literals.append(num)
     return symbols, literals
+
+def __construct_rule_regex(symbols: list[Optional[str]], literals: list[Optional[int]]) -> str:
+    """
+    :param symbols: Symbols from __parse_shape_str
+    :param literals: Literal values from __parse_shape_str
+    :returns: The regex pattern validating the rule.
+    """
+    n = len(symbols) # == len(literals)
+    regex_parts: list[str] = []
+    for i in range(n):
+        modifier = ''
+        if symbols[i][-1] in '*?+':
+            modifier = f'{symbols[i][-1]}?'
+        if literals[i] is not None:
+            element = literals[i]
+        else:
+            element = f'[1-9][0-9]*'
+        regex_parts.append(f'((?:{element},?){modifier})')
+    regex_pattern = "".join(regex_parts)
+    return regex_pattern
 
 class ShapeRule:
     """
