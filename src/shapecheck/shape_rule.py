@@ -54,9 +54,9 @@ def _construct_rule_regex(symbols: list[str], literals: list[Optional[int]]) -> 
         elif symbols[i][-1] == '?':
             modifier = symbols[i][-1]
         if literals[i] is not None:
-            element = literals[i]
+            element = str(literals[i])
         else:
-            element = f'[1-9][0-9]*'
+            element = '[1-9][0-9]*'
         regex_parts.append(f'((?:{element},?){modifier})')
     regex_pattern = "".join(regex_parts)
     return regex_pattern
