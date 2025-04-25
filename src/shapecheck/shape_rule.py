@@ -3,7 +3,7 @@ Contains code for checking a shape rule which is expressed as a string of symbol
 and literals.
 """
 from __future__ import annotations
-from typing import TYPE_CHECKING, Optional, overload
+from typing import TYPE_CHECKING, Optional, overload, Sequence
 from shapecheck.has_shape import HasShape
 import re
 
@@ -11,7 +11,7 @@ __all__ = ["ShapeRule"]
 if TYPE_CHECKING:
     from shapecheck.shape_check import ShapeCheck
 
-def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[int]]]:
+def _parse_shape_str(shape_str: str) -> tuple[list[str], list[int | None]]:
     """
     :param shape_str: A shape string consisting of symbols and literals seperated
     by commas.
@@ -39,7 +39,7 @@ def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[int]]]:
         literals.append(num)
     return symbols, literals
 
-def _construct_rule_regex(symbols: list[str], literals: list[Optional[int]]) -> str:
+def _construct_rule_regex(symbols: list[str], literals: Sequence[int | str | None]) -> str:
     """
     :param symbols: Symbols from __parse_shape_str
     :param literals: Literal values from __parse_shape_str
@@ -74,7 +74,18 @@ class ShapeRule:
         self._context = context
         self._shape_str = shape_str
         self._symbols, self._literals = _parse_shape_str(self._shape_str)
-        self._pattern = _construct_rule_regex(self._symbols, self._literals)
+
+    def __get_pattern(self) -> str:
+        """
+        Fill the literals with values from context before
+        constructing the regex pattern.
+        :returns: Regex that can be used to match shape strings.
+        """
+        literals: list[str | int | None] = list(self._literals)
+        for i, symbol in enumerate(self._symbols):
+            if symbol in self._context._vars:
+                literals[i] = ','.join(map(str, self._context._vars[symbol]))
+        return _construct_rule_regex(self._symbols, literals)
 
     @overload
     def check(self, shape: HasShape) -> bool: ...
@@ -94,5 +105,14 @@ class ShapeRule:
             raise ValueError("shape must be a tuple of integers.")
         shape = tuple(int(x) for x in shape)
         shape_str = ','.join(map(str, shape))
-        match = re.fullmatch(self._pattern, shape_str)
-        return match is not None
+        pattern = self.__get_pattern()
+        match = re.fullmatch(pattern, shape_str)
+        if match is None:
+            return False
+        for i, group_str in enumerate(match.groups()):
+            group_tuple = tuple(map(int, filter(bool, group_str.split(','))))
+            prev_tuple = self._context._vars.get(self._symbols[i], group_tuple)
+            if group_tuple != prev_tuple:
+                return False
+            self._context._vars[self._symbols[i]] = group_tuple
+        return True

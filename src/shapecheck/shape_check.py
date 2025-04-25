@@ -8,6 +8,9 @@ class ShapeCheck:
     Contains a context for maintaining consistency of symbols between
     subsequent shape checks.
     """
+    def __init__(self) -> None:
+        self._vars: dict[str, tuple[int, ...]] = {}
+
     def __call__(self, shape_str: str) -> ShapeRule:
         """
         :param shape_str: The shape string to parse.
