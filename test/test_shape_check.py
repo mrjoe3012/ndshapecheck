@@ -4,8 +4,8 @@ Tests for the shape check library.
 from shapecheck.shape_check import ShapeCheck
 
 def test_single_shape_h1() -> None:
-    sc = ShapeCheck()
     def f(a, b):
+        sc = ShapeCheck()
         return sc(a).check(b)
     assert f('1,2,3', (1,2,3))
     assert f('1', (1,))
@@ -51,3 +51,5 @@ def test_context_s1() -> None:
     sc = ShapeCheck()
     assert sc('A*,2,B?').check((1, 2, 3, 2, 4))
     assert not sc('C,B?').check((1,))
+
+test_context_h1()
