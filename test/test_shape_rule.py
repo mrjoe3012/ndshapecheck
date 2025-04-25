@@ -19,4 +19,21 @@ def test_construct_rule_regex() -> None:
     assert re.fullmatch(regex, '1,2,3') is not None
     assert re.fullmatch(regex, '1,3') is not None
     assert re.fullmatch(regex, '3') is None
-    assert re.fullmatch(regex, '3, 2') is None
+    assert re.fullmatch(regex, '3,2') is None
+    symbols = ['1', 'N*', '1']
+    literals = [1, None, 1]
+    regex = __construct_rule_regex(symbols, literals)
+    assert re.fullmatch(regex, '1,1') is not None
+    assert re.fullmatch(regex, '1,1,1') is not None
+    assert re.fullmatch(regex,'2,1,1') is None
+    assert re.fullmatch(regex,'2,1,2,3,2') is None
+    assert re.fullmatch(regex,'1,4,3,3,4,2') is None
+    assert re.fullmatch(regex,'1,4,3,3,4,1') is not None
+    symbols = ['1?', 'N', 'M?']
+    literals = [1,None,None]
+    regex = __construct_rule_regex(symbols, literals)
+    assert re.fullmatch(regex,'1,2') is not None
+    assert re.fullmatch(regex,'2') is not None
+    assert re.fullmatch(regex,'2,4') is not None
+    assert re.fullmatch(regex,'1,2,3,3') is None
+    assert re.fullmatch(regex,'2,3,3') is None

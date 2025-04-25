@@ -49,8 +49,10 @@ def __construct_rule_regex(symbols: list[Optional[str]], literals: list[Optional
     regex_parts: list[str] = []
     for i in range(n):
         modifier = ''
-        if symbols[i][-1] in '*?+':
+        if symbols[i][-1] in '*+':
             modifier = f'{symbols[i][-1]}?'
+        elif symbols[i][-1] == '?':
+            modifier = symbols[i][-1]
         if literals[i] is not None:
             element = literals[i]
         else:
