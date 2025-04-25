@@ -21,14 +21,11 @@ jobs:
         uv venv --python ${{ matrix.python-version }}
         uv sync --group dev
     - name: Test - pytest
-      continue-on-error: true
       run: |
         uv run pytest src test
     - name: Lint - mypy
-      continue-on-error: true
       run: |
         uv run mypy src test
     - name: Lint - ruff
-      continue-on-error: true
       run: |
         uv run ruff check src test
