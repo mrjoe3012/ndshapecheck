@@ -11,7 +11,7 @@ __all__ = ["ShapeRule"]
 if TYPE_CHECKING:
     from shapecheck.shape_check import ShapeCheck
 
-def __parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[int]]]:
+def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[int]]]:
     """
     :param shape_str: A shape string consisting of symbols and literals seperated
     by commas.
@@ -39,7 +39,7 @@ def __parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[int]]]:
         literals.append(num)
     return symbols, literals
 
-def __construct_rule_regex(symbols: list[Optional[str]], literals: list[Optional[int]]) -> str:
+def _construct_rule_regex(symbols: list[str], literals: list[Optional[int]]) -> str:
     """
     :param symbols: Symbols from __parse_shape_str
     :param literals: Literal values from __parse_shape_str
@@ -73,6 +73,8 @@ class ShapeRule:
         """
         self._context = context
         self._shape_str = shape_str
+        self._symbols, self._literals = _parse_shape_str(self._shape_str)
+        self._pattern = _construct_rule_regex(self._symbols, self._literals)
 
     @overload
     def check(self, shape: HasShape) -> bool: ...
@@ -91,5 +93,6 @@ class ShapeRule:
         elif not isinstance(shape, tuple):
             raise ValueError("shape must be a tuple of integers.")
         shape = tuple(int(x) for x in shape)
-        raise NotImplementedError()
-        return False
+        shape_str = ','.join(map(str, shape))
+        match = re.fullmatch(self._pattern, shape_str)
+        return match is not None
