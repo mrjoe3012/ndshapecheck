@@ -28,7 +28,7 @@ Import the library:
 from ndshapecheck import ShapeCheck
 ```
 
-Create a [ShapeCheck]{.title-ref} instance and verify shapes:
+Create a `ShapeCheck` instance and verify shapes:
 
 ``` python
 import numpy as np
