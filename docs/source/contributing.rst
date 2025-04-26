@@ -64,11 +64,13 @@ Test organization:
 Contribution Checklist
 -----------------------
 
+- Create your own fork
 - Add yourself to ``contributors.md``.
 - Add or update tests if needed.
 - Add a copyright header:
   
   - You may add your name to the copyright line
     of any files you significantly modify or create.
+- Create a pull request
 
 Thank you for helping to improve the project!
