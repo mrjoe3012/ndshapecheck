@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[str]], list[int | None]]:
     """
     :param shape_str: A shape string consisting of symbols and literals seperated
-    by commas.
+        by commas.
     :returns: Tuple containing the symbols, modifiers and literals.
     """
     symbols: list[str] = []
@@ -75,7 +75,7 @@ class ShapeRule:
     def __init__(self, context: ShapeCheck, shape_str: str) -> None:
         """
         :param context: The ShapeCheck which is used as a context to enforce consistency
-        wiht symbols involved in checking other arrays.
+            with symbols involved in checking other arrays.
         :param shape_str: The string describing the rule.
         """
         self._context = context
@@ -85,7 +85,7 @@ class ShapeRule:
     def __get_pattern(self) -> str:
         """
         Fill the literals with values from context before
-        constructing the regex pattern.
+            constructing the regex pattern.
         :returns: Regex that can be used to match shape strings.
         """
         literals: list[str | int | None] = list(self._literals)
@@ -103,9 +103,9 @@ class ShapeRule:
     def check(self, shape):
         """
         Has side-effects upon the context passed to the __init__ constructor by assigning
-        shape values to provided symbols.
+            shape values to provided symbols.
         :param shape: A multidimensional array's shape as a tuple
-        of integers.
+            of integers.
         :returns: True if the provided shape matches the rule.
         """
         if isinstance(shape, HasShape):
