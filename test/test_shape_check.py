@@ -50,5 +50,3 @@ def test_context_s1() -> None:
     sc = ShapeCheck()
     assert sc('A*,2,B?').check((1, 2, 3, 2, 4))
     assert not sc('C,B?').check((1,))
-
-test_context_h1()
