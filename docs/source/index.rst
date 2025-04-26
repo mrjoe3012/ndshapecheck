@@ -6,14 +6,16 @@
 shapecheck documentation
 ========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+Welcome to the shapecheck docs! Shapecheck is a simple library for checking the shape of
+multidimensional arrays, for example numpy arrays or torch tensors. See the contributing
+page for information about contributing.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   quickstart
+   examples
+   contributing
    modules
 
