@@ -13,9 +13,13 @@ jobs:
       id-token: write
     
     steps:
+      - name: Get tag name
+        uses: olegtarasov/get-tag@v2.1.4
+        id: tagname
+        with:
+          tagRegex: "v(.*)"
       - name: Checkout
-        uses: actions/checkout@v4
-      
+        uses: actions/checkout@v4 
       - name: Setup Python 3.10
         uses: actions/setup-python@v5
         with:
@@ -31,7 +35,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release
         with:
-          files: ${{ env.WHL_FILES }}
+          files: "dist/shapecheck-${{ steps.tagname.outputs.tag }}-py3-none-any.whl" 
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
