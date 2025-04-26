@@ -27,10 +27,11 @@ jobs:
       - name: Build
         run: |
           uv build
+          echo "WHL_FILES=$(ls dist/*.whl)" >> $GITHUB_ENV
       - name: Create GitHub Release
         uses: softprops/action-gh-release
         with:
-          files: dist/*.whl
+          files: ${{ env.WHL_FILES }}
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
