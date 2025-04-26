@@ -6,12 +6,12 @@ and literals.
 """
 from __future__ import annotations
 from typing import TYPE_CHECKING, Optional, overload, Sequence
-from shapecheck.has_shape import HasShape
+from ndshapecheck.has_shape import HasShape
 import re
 
 __all__ = ["ShapeRule"]
 if TYPE_CHECKING:
-    from shapecheck.shape_check import ShapeCheck
+    from ndshapecheck.shape_check import ShapeCheck
 
 def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[str]], list[int | None]]:
     """

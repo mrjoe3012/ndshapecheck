@@ -5,12 +5,12 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-import shapecheck
+import ndshapecheck
 
-project = shapecheck.__name__
+project = ndshapecheck.__name__
 copyright = '2025, Joseph Agrane'
 author = 'Joseph Agrane'
-release = shapecheck.__version__
+release = ndshapecheck.__version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

@@ -22,7 +22,7 @@ Import the library:
 
 .. code-block:: python
 
-   from shapecheck import ShapeCheck
+   from ndshapecheck import ShapeCheck
 
 Create a `ShapeCheck` instance and verify shapes:
 

@@ -1,5 +1,5 @@
 [project]
-name = "shapecheck"
+name = "ndshapecheck"
 version = "0.2.0"
 description = "A library for checking the shapes of multidimensional arrays."
 readme = "README.md"
@@ -8,9 +8,6 @@ authors = [
 ]
 requires-python = ">=3.10"
 dependencies = []
-
-[project.scripts]
-shapecheck = "shapecheck:main"
 
 [build-system]
 requires = ["hatchling"]

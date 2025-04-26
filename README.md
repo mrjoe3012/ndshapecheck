@@ -1,10 +1,10 @@
-# shapecheck
+# ndshapecheck
 
-Shapecheck is a simple library for checking the shape of numpy arrays. To get started, see
+ndshapecheck is a simple library for checking the shape of numpy arrays. To get started, see
 the examples below. For more information, please visit the
-[documentation](https://mrjoe3012.github.io/shapecheck).
+[documentation](https://mrjoe3012.github.io/ndshapecheck).
 
-Contributions are welcome! Please read the [contribution guide](https://mrjoe3012.github.io/shapecheck/contributing.md) for more information.
+Contributions are welcome! Please read the [contribution guide](https://mrjoe3012.github.io/ndshapecheck/contributing.md) for more information.
 
 # Quickstart
 
@@ -25,7 +25,7 @@ pip install ndshapecheck
 Import the library:
 
 ``` python
-from shapecheck import ShapeCheck
+from ndshapecheck import ShapeCheck
 ```
 
 Create a [ShapeCheck]{.title-ref} instance and verify shapes:

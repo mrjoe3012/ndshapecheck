@@ -1,6 +1,6 @@
 # Copyright (c) 2025 Joseph Agrane
 # Licensed under the MIT License. See LICENSE file in the project root for full license information.
-from shapecheck.shape_check import ShapeCheck
+from ndshapecheck.shape_check import ShapeCheck
 
 def test_single_shape_h1() -> None:
     def f(a, b):

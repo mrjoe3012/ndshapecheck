@@ -11,7 +11,7 @@ You can use ``ShapeCheck`` to verify that array shapes match a pattern:
 
 .. code-block:: python
 
-   from shapecheck.shape_check import ShapeCheck
+   from ndshapecheck.shape_check import ShapeCheck
 
    sc = ShapeCheck()
    sc('1,2,3').check((1, 2, 3))  # ✅ Passes

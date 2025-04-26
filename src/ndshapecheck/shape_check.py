@@ -1,7 +1,7 @@
 # Copyright (c) 2025 Joseph Agrane
 # Licensed under the MIT License. See LICENSE file in the project root for full license information.
 from __future__ import annotations
-from shapecheck.shape_rule import ShapeRule
+from ndshapecheck.shape_rule import ShapeRule
 
 __all__ = ["ShapeCheck"]
 

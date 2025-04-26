@@ -1,6 +1,6 @@
 # Copyright (c) 2025 Joseph Agrane
 # Licensed under the MIT License. See LICENSE file in the project root for full license information.
-from shapecheck.shape_rule import _parse_shape_str, _construct_rule_regex
+from ndshapecheck.shape_rule import _parse_shape_str, _construct_rule_regex
 import re
 
 def test_parse_shape_str() -> None:
