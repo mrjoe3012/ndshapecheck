@@ -1,0 +1,4 @@
+#!/bin/bash
+uv run pytest test -v
+uv run mypy src test
+uv run ruff check src test
