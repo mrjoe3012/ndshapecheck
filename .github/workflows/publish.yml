@@ -9,6 +9,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    environment:
+      name: pypi
+      url: https://pypi.org/p/ndshapecheck
+
     permissions:
       id-token: write
       contents: write
@@ -30,7 +34,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2.2.2
         with:
-          files: "ls dist/*.whl" 
+          files: "dist/*.whl" 
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
