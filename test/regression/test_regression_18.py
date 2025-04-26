@@ -1,6 +1,6 @@
-"""
-https://github.com/mrjoe3012/shapecheck/issues/18
-"""
+# Copyright (c) 2025 Joseph Agrane
+# Licensed under the MIT License. See LICENSE file in the project root for full license information.
+# https://github.com/mrjoe3012/shapecheck/issues/18
 from shapecheck.shape_check import ShapeCheck
 
 def test_regression_18() -> None:
