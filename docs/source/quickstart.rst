@@ -13,7 +13,7 @@ Install the library with:
 
 .. code-block:: bash
 
-   pip install shapecheck
+   pip install ndshapecheck
 
 Basic Usage
 -----------

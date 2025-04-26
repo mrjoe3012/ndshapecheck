@@ -17,7 +17,7 @@ Contributions are welcome! Please read the [contribution guide](https://mrjoe301
 Install the library with:
 
 ``` bash
-pip install shapecheck
+pip install ndshapecheck
 ```
 
 ## Basic Usage
