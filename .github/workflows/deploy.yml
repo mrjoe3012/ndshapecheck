@@ -28,7 +28,7 @@ jobs:
           --ext-todo \
           -o docs/source \
           ./src/
-        uv run sphinx-build docs/source docs/build
+        uv run sphinx-build docs/source docs/build/html
     - name: Upload docs
       uses: actions/upload-pages-artifact@v3
       with:
