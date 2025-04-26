@@ -26,7 +26,8 @@ html_static_path = ['_static']
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx_autodoc_typehints",
-    "sphinx.ext.napoleon"
+    "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
 ]
 napoleon_google_docstring = False
 napoleon_numpy_docstring = False
