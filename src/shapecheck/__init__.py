@@ -1,2 +1,2 @@
-def main() -> None:
-    print("Hello from shapecheck!")
+from .shape_check import ShapeCheck
+__all__ = ['ShapeCheck']
