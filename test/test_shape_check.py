@@ -50,3 +50,29 @@ def test_context_s1() -> None:
     sc = ShapeCheck()
     assert sc('A*,2,B?').check((1, 2, 3, 2, 4))
     assert not sc('C,B?').check((1,))
+
+def test_why() -> None:
+    def generate_error_msg(shape_string: str, shape: tuple[int, ...]) -> str:
+        return f"The shape {shape} does not match the rule '{shape_string}'."
+    sc = ShapeCheck()
+    sc('1,2,3').check((1, 2, 3))
+    assert sc.why == ''
+    sc('N?,2').check((2,))
+    assert sc.why == ''
+    sc('N?,3').check((1, 3))
+    assert sc.why == generate_error_msg('N?=(),3', (1, 3))
+    sc = ShapeCheck()
+    sc('2,A+').check((2, 2, 3))
+    sc('2,A+').check((2, 2, 3, 4))
+    assert sc.why == generate_error_msg('2,A+=(2, 3)', (2, 2, 3, 4))
+    sc = ShapeCheck()
+    sc('dims,N*').check((3, 56, 54))
+    sc('dims,N*').check((4, 56, 54))
+    assert sc.why == generate_error_msg('dims=(3,),N*=(56, 54)', (4, 56, 54))
+    sc = ShapeCheck()
+    sc('dims,N*').check((3, 56, 54))
+    sc('dims,N*').check((3, 54, 56))
+    assert sc.why == generate_error_msg('dims=(3,),N*=(56, 54)', (3, 54, 56))
+    sc = ShapeCheck()
+    sc('N,2').check((2, 3))
+    assert sc.why == generate_error_msg('N,2', (2, 3))

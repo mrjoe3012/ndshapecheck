@@ -12,6 +12,7 @@ class ShapeCheck:
     """
     def __init__(self) -> None:
         self._vars: dict[str, tuple[int, ...]] = {}
+        self._why: str = ''
 
     def __call__(self, shape_str: str) -> ShapeRule:
         """
@@ -19,3 +20,10 @@ class ShapeCheck:
         :returns: a shape rule which can be used to check if an array's shape conforms to it.
         """
         return ShapeRule(self, shape_str)
+
+    @property
+    def why(self) -> str:
+        """
+        :returns: The reason for the failure of a check() call.
+        """
+        return self._why
