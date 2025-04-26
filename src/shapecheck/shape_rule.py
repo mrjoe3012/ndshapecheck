@@ -110,6 +110,9 @@ class ShapeRule:
         if match is None:
             return False
         for i, group_str in enumerate(match.groups()):
+            # dont' enforce consistency for literals
+            if self._literals[i] is not None:
+                continue
             group_tuple = tuple(map(int, filter(bool, group_str.split(','))))
             prev_tuple = self._context._vars.get(self._symbols[i], group_tuple)
             if group_tuple != prev_tuple:
