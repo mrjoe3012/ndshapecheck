@@ -1,3 +1,5 @@
+# Copyright (c) 2025 Joseph Agrane
+# Licensed under the MIT License. See LICENSE file in the project root for full license information.
 """
 Contains code for checking a shape rule which is expressed as a string of symbols
 and literals.
