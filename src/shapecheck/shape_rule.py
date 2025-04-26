@@ -32,7 +32,7 @@ def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[str]], li
     for elem in elements:
         num = None
         try:
-            if elem[-1] in '?*+':
+            if elem[-1] in tuple('?*+'):
                 num = int(elem[:-1])
             else:
                 num = int(elem)
@@ -40,7 +40,7 @@ def _parse_shape_str(shape_str: str) -> tuple[list[str], list[Optional[str]], li
             num = None
         symbols.append(elem)
         literals.append(num)
-        if elem[-1] in '?*+':
+        if elem[-1] in tuple('?*+'):
             modifiers.append(elem[-1])
         else:
             modifiers.append(None)
