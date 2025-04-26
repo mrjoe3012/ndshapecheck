@@ -28,4 +28,8 @@ jobs:
           --ext-todo \
           -o docs/source \
           ./src/
-        sphinx-build docs/source docs
+        sphinx-build docs/source docs/build
+    - name: Upload docs
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: docs/build/html
