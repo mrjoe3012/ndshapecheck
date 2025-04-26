@@ -23,12 +23,12 @@ jobs:
         uv sync --group dev
     - name: Build Docs
       run: |
-        sphinx-apidoc \
+        uv run sphinx-apidoc \
           --ext-autodoc \
           --ext-todo \
           -o docs/source \
           ./src/
-        sphinx-build docs/source docs/build
+        uv run sphinx-build docs/source docs/build
     - name: Upload docs
       uses: actions/upload-pages-artifact@v3
       with:
