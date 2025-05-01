@@ -116,9 +116,7 @@ class ShapeRule:
         shape_str = ','.join(map(str, shape))
         if len(shape_str) > 0:
             shape_str += ','
-        print(shape_str)
         pattern = self.__get_pattern()
-        print(pattern)
         match = re.fullmatch(pattern, shape_str)
         if match is None:
             # construct shape string with context values added in
