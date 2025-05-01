@@ -6,6 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Joseph Agrane", email = "josephagrane@gmail.com" }
 ]
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
 dependencies = []
 
