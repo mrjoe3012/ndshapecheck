@@ -22,26 +22,26 @@ def test_construct_rule_regex() -> None:
     literals = [None, 3]
     modifiers = ['+', None]
     regex = _construct_rule_regex(symbols, modifiers, literals)
-    assert re.fullmatch(regex, '1,2,3') is not None
-    assert re.fullmatch(regex, '1,3') is not None
-    assert re.fullmatch(regex, '3') is None
-    assert re.fullmatch(regex, '3,2') is None
+    assert re.fullmatch(regex, '1,2,3,') is not None
+    assert re.fullmatch(regex, '1,3,') is not None
+    assert re.fullmatch(regex, '3,') is None
+    assert re.fullmatch(regex, '3,2,') is None
     symbols = ['1', 'N*', '1']
     literals = [1, None, 1]
     modifiers = [None, '*', None]
     regex = _construct_rule_regex(symbols, modifiers, literals)
-    assert re.fullmatch(regex, '1,1') is not None
-    assert re.fullmatch(regex, '1,1,1') is not None
-    assert re.fullmatch(regex,'2,1,1') is None
-    assert re.fullmatch(regex,'2,1,2,3,2') is None
-    assert re.fullmatch(regex,'1,4,3,3,4,2') is None
-    assert re.fullmatch(regex,'1,4,3,3,4,1') is not None
+    assert re.fullmatch(regex, '1,1,') is not None
+    assert re.fullmatch(regex, '1,1,1,') is not None
+    assert re.fullmatch(regex,'2,1,1,') is None
+    assert re.fullmatch(regex,'2,1,2,3,2,') is None
+    assert re.fullmatch(regex,'1,4,3,3,4,2,') is None
+    assert re.fullmatch(regex,'1,4,3,3,4,1,') is not None
     symbols = ['1?', 'N', 'M?']
     literals = [1,None,None]
     modifiers = ['?', None, '?']
     regex = _construct_rule_regex(symbols, modifiers, literals)
-    assert re.fullmatch(regex,'1,2') is not None
-    assert re.fullmatch(regex,'2') is not None
-    assert re.fullmatch(regex,'2,4') is not None
-    assert re.fullmatch(regex,'1,2,3,3') is None
-    assert re.fullmatch(regex,'2,3,3') is None
+    assert re.fullmatch(regex,'1,2,') is not None
+    assert re.fullmatch(regex,'2,') is not None
+    assert re.fullmatch(regex,'2,4,') is not None
+    assert re.fullmatch(regex,'1,2,3,3,') is None
+    assert re.fullmatch(regex,'2,3,3,') is None
