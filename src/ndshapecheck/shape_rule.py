@@ -64,7 +64,7 @@ def _construct_rule_regex(symbols: list[str], modifiers: list[Optional[str]],
             element = str(literals[i])
         else:
             element = '[1-9][0-9]*'
-        regex_parts.append(f'((?:{element},?){modifier})')
+        regex_parts.append(f'((?:{element}{"," if element else ""}){modifier})')
     regex_pattern = "".join(regex_parts)
     return regex_pattern
 
@@ -114,7 +114,11 @@ class ShapeRule:
             raise ValueError("shape must be a tuple of integers.")
         shape = tuple(int(x) for x in shape)
         shape_str = ','.join(map(str, shape))
+        if len(shape_str) > 0:
+            shape_str += ','
+        print(shape_str)
         pattern = self.__get_pattern()
+        print(pattern)
         match = re.fullmatch(pattern, shape_str)
         if match is None:
             # construct shape string with context values added in
