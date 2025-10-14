@@ -63,7 +63,7 @@ def _construct_rule_regex(symbols: list[str], modifiers: list[Optional[str]],
         if literals[i] is not None:
             element = str(literals[i])
         else:
-            element = '[1-9][0-9]*'
+            element = '[0-9][0-9]*'
         regex_parts.append(f'((?:{element}{"," if element else ""}){modifier})')
     regex_pattern = "".join(regex_parts)
     return regex_pattern
